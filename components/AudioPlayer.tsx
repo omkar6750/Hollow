@@ -44,7 +44,11 @@ export default function AudioPlayer({ src }: { src: string }) {
   };
 
   const togglePlay = () => {
-    isPlaying ? handlePause() : handlePlay();
+    if (isPlaying) {
+      handlePause();
+    } else {
+      handlePlay();
+    }
   };
 
   useEffect(() => {
