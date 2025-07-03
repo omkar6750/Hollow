@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useRef, useState } from "react";
 import Modal from "./Modal";
 import AudioPlayer from "../AudioPlayer";
 

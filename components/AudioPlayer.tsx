@@ -59,6 +59,10 @@ export default function AudioPlayer({ src }: { src: string }) {
     const updateProgress = () => {
       setProgress((audio.currentTime / audio.duration) * 100 || 0);
     };
+    const handleEnded = () => {
+      setIsPlaying(false);
+      setProgress(0);
+    };
 
     audio.addEventListener("timeupdate", updateProgress);
     audio.addEventListener("ended", () => {
@@ -68,6 +72,7 @@ export default function AudioPlayer({ src }: { src: string }) {
 
     return () => {
       audio.removeEventListener("timeupdate", updateProgress);
+      audio.removeEventListener("ended", handleEnded);
     };
   }, []);
 
