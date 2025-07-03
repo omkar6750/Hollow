@@ -26,7 +26,9 @@ export default async function CooldownPage() {
   }
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center bg-black">
-      <h1 className="bates m-10 text-6xl">You've exhausted your chances</h1>
+      <h1 className="bates m-10 text-6xl">
+        You&apos;ve exhausted your chances
+      </h1>
       <h2 className="bates m-20 text-6xl">He suspects You</h2>
       <h3 className="bates text-5xl">Lay low till tomorrow</h3>
     </div>

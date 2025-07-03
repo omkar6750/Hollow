@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { suspects } from "@/lib/suspects"; // Assuming this path is correct
 import { checkGuess } from "./actions";
-import { signIn } from "next-auth/react";
 import Image from "next/image";
 import LoginModal from "@/components/loginModal";
 import { useClickSound } from "../clickAudioProvider";
@@ -36,9 +35,11 @@ export default function GuessPage() {
     setGuessesMade(response.newGuessCount ?? 0);
 
     if (response.correct) {
+      setIsGameOver(true);
       window.location.href = "/winner";
     } else {
       if (response.gameOver) {
+        setIsGameOver(true);
         window.location.href = "/cooldown";
       } else {
         setResult("Wrong! Try again.");

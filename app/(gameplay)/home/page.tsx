@@ -95,7 +95,7 @@ function ImageDetailModal({
       onClick={onClose}
     >
       <div className="relative p-4">
-        <img
+        <Image
           src={src}
           alt="Detailed view"
           className="max-h-[90vh] max-w-[90vw] rounded-lg object-contain"
@@ -117,18 +117,6 @@ export default function Page() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [playing, setPlaying] = useState<string | null>(null);
   const currentAudioRef = useRef<HTMLAudioElement | null>(null);
-
-  const handleAudioPlay = (
-    e: React.SyntheticEvent<HTMLAudioElement, Event>,
-  ) => {
-    if (
-      currentAudioRef.current &&
-      currentAudioRef.current !== e.currentTarget
-    ) {
-      currentAudioRef.current.pause();
-    }
-    currentAudioRef.current = e.currentTarget;
-  };
 
   return (
     <div className="relative bottom-0 flex h-[calc(100vh-6rem)] flex-1 flex-row">
@@ -210,7 +198,7 @@ export default function Page() {
       {/* Audio Modal */}
       <Modal open={modal === "audio"} onClose={() => setModal(null)}>
         <div className="relative flex h-full w-full flex-col items-center justify-center p-20">
-          <img
+          <Image
             src="Assets/wooden-floor-background_53876-88628.avif"
             alt="background"
             className="absolute inset-0 z-0 h-full w-full rounded-lg object-cover"
@@ -221,7 +209,13 @@ export default function Page() {
           <ul className="z-10">
             {audioFiles.map((audio) => (
               <li key={audio.src} className="mb-2">
-                <span className="text-black">{audio.label}</span>
+                <span
+                  className={`text-black transition-colors ${
+                    playing === audio.src ? "font-bold text-red-700" : ""
+                  }`}
+                >
+                  {audio.label}
+                </span>
                 <audio
                   src={audio.src}
                   controls
@@ -264,7 +258,7 @@ export default function Page() {
         className="h-auto w-auto"
       >
         <div className="relative overflow-hidden rounded-lg border-8 border-yellow-800/50">
-          <img
+          <Image
             src={mapImage}
             alt="Map"
             className="max-h-[85vh] object-contain"
@@ -279,7 +273,7 @@ export default function Page() {
         className="h-auto w-auto"
       >
         <div className="relative">
-          <img
+          <Image
             src={autopsyReports[autopsyIndex]}
             alt={`Autopsy Report ${autopsyIndex + 1}`}
             className="max-h-[90vh] max-w-[80vw] rounded-lg object-contain"
@@ -330,7 +324,7 @@ export default function Page() {
           </h2>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
             {polaroids.map((src) => (
-              <img
+              <Image
                 key={src}
                 src={src}
                 alt="Polaroid"
@@ -360,7 +354,7 @@ export default function Page() {
           </h2>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
             {documents.map((src) => (
-              <img
+              <Image
                 key={src}
                 src={src}
                 alt="Document"

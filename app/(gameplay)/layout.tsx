@@ -7,7 +7,11 @@ import { usePathname } from "next/navigation";
 import MusicPlayer from "./audioProvider";
 import ClickSoundProvider from "./clickAudioProvider";
 
-export default function ({ children }: { children: React.ReactNode }) {
+export default function gamePlayLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
 
   const simplifiedLayoutPages = ["/winner", "/cooldown"];
