@@ -33,11 +33,6 @@ export default function AudioPlayer({ src }: { src: string }) {
     if (!audioRef.current) return;
     resetAllPlayers(audioRef);
 
-    if (currentlyPlaying && currentlyPlaying !== audioRef.current) {
-      currentlyPlaying.pause();
-      currentlyPlaying.currentTime = 0;
-    }
-
     audioRef.current.play();
     currentlyPlaying = audioRef.current;
     setIsPlaying(true);
