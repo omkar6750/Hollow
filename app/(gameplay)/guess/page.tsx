@@ -72,7 +72,7 @@ export default function GuessPage() {
               playClickSound();
             }}
             disabled={isGameOver}
-            className={`m-3 mx-2 flex flex-col items-center justify-center rounded-lg p-2 transition-all ${selected === suspect.id ? "ring-4 ring-red-500" : ""} ${isGameOver ? "cursor-not-allowed opacity-50" : "hover:scale-105"} `}
+            className={`m-3 mx-1 flex flex-col items-center justify-center rounded-lg p-1 transition-all ${selected === suspect.id ? "ring-4 ring-red-500" : ""} ${isGameOver ? "cursor-not-allowed opacity-50" : "hover:scale-105"} `}
           >
             <Image
               src={suspect.imageSrc} // Assuming imageSrc is a valid import
