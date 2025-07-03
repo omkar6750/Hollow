@@ -1,12 +1,41 @@
 "use server";
 
-import { suspects } from "@/lib/suspects";
+import { auth } from "@/auth";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function checkGuess(suspectId: number) {
-    // Replace with your real logic for the correct suspect
-    const correctId = 1; // e.g., suspects.find(s => s.isReal).id
+  const session = await auth();
 
-    return {
-        correct: suspectId === correctId,
-    };
+  if (!session?.user?.id) {
+    return { error: "AUTH_REQUIRED" };
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+  });
+
+  if (!user) {
+    return { error: "User not found." };
+  }
+
+  if (user.guessCount >= 2) {
+    return { error: "You have no more guesses left.", gameOver: true };
+  }
+
+  // Increment guess count in the database
+  const updatedUser = await prisma.user.update({
+    where: { id: session.user.id },
+    data: { guessCount: { increment: 1 } },
+  });
+
+  const correctId = 1; // The actual ID of the correct suspect
+  const isCorrect = suspectId === correctId;
+
+  return {
+    correct: isCorrect,
+    newGuessCount: updatedUser.guessCount,
+    gameOver: updatedUser.guessCount >= 2 && !isCorrect,
+  };
 }

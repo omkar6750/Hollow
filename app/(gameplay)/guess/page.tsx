@@ -1,69 +1,102 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { suspects } from "@/lib/suspects";
+import React, { useState } from "react";
+import { suspects } from "@/lib/suspects"; // Assuming this path is correct
 import { checkGuess } from "./actions";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
+import LoginModal from "@/components/loginModal";
+import { useClickSound } from "../clickAudioProvider";
 
-export default function Guess() {
-    const [selected, setSelected] = useState<number | null>(null);
-    const [result, setResult] = useState<null | { correct: boolean }>(null);
+export default function GuessPage() {
+  const { playClickSound } = useClickSound();
 
-    const handleGuess = async () => {
-        if (selected === null) return;
-        const res = await checkGuess(selected);
-        setResult(res);
-    };
-    if (result && result.correct) {
-        console.log("Correct guess!");
-    } else if (result && !result.correct) {
-        console.log("Wrong guess!");
+  const [selected, setSelected] = useState<number | null>(null);
+  const [result, setResult] = useState<string | null>(null);
+  const [guessesMade, setGuessesMade] = useState(0);
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  const handleGuess = async () => {
+    if (selected === null) return;
+
+    const response = await checkGuess(selected);
+
+    if (response.error) {
+      if (response.error === "AUTH_REQUIRED") {
+        setShowLoginModal(true);
+      } else {
+        setResult(response.error);
+        if (response.gameOver) {
+          window.location.href = "/cooldown";
+        }
+      }
+      return;
     }
-    return (
-        <div className="flex h-[calc(100vh-6rem)] w-full flex-col  items-center justify-center p-44">
-            <header className="text-4xl bates p-5 ">
-                Guess The Real Hollow
-            </header>
-            <p className="text-3xl  ">
-                you have only two guesses and if you get both the
-            </p>
-            <p className="text-3xl  ">guesses wrong you die and games end.</p>
-            <div className="flex items-center justify-center">
-                {suspects.map((suspect) => (
-                    <button
-                        key={suspect.id}
-                        type="button"
-                        onClick={() => setSelected(suspect.id)}
-                        className={`flex flex-col items-center justify-center m-2 ${
-                            selected === suspect.id ? "ring-4 ring-red-500" : ""
-                        }`}
-                    >
-                        <Image
-                            src={suspect.imageSrc.src}
-                            alt={suspect.title}
-                            className="h-24 w-24 rounded-full object-cover"
-                            width={96}
-                            height={96}
-                        />
-                        <p className="text-xl bates text-center">
-                            {suspect.title}
-                        </p>
-                    </button>
-                ))}
-            </div>
-            <div className="flex items-center justify-center h-32 w-96 bg-black/25 m-10 rounded-2xl">
-                <button
-                    className="text-2xl bates bg-red-700 text-white px-8 py-3 rounded-xl mt-4 disabled:opacity-50"
-                    onClick={handleGuess}
-                    disabled={selected === null}
-                >
-                    Enter
-                </button>
-            </div>
-            {result && (
-                <div className="mt-6 text-2xl bates">
-                    {result.correct ? "Correct! 🎉" : "Wrong! 💀"}
-                </div>
-            )}
-        </div>
-    );
+
+    setGuessesMade(response.newGuessCount ?? 0);
+
+    if (response.correct) {
+      window.location.href = "/winner";
+    } else {
+      if (response.gameOver) {
+        window.location.href = "/cooldown";
+      } else {
+        setResult("Wrong! Try again.");
+      }
+    }
+  };
+
+  return (
+    <div className="relative flex h-screen w-full flex-col items-center justify-center p-4">
+      {/* Login Modal */}
+      {showLoginModal && (
+        <LoginModal onClose={() => setShowLoginModal(false)} />
+      )}
+
+      {/* Main Game Content */}
+      <header className="p-5 text-center text-4xl">
+        Guess The Real Hollow
+      </header>
+      <p className="text-center text-3xl">
+        You have {2 - guessesMade} guesses left.
+      </p>
+
+      <div className="my-8 flex flex-wrap items-center justify-center">
+        {suspects.map((suspect) => (
+          <button
+            key={suspect.id}
+            type="button"
+            onClick={() => {
+              setSelected(suspect.id);
+              playClickSound();
+            }}
+            disabled={isGameOver}
+            className={`m-2 mx-5 flex flex-col items-center justify-center rounded-lg p-2 transition-all ${selected === suspect.id ? "ring-4 ring-red-500" : ""} ${isGameOver ? "cursor-not-allowed opacity-50" : "hover:scale-105"} `}
+          >
+            <Image
+              src={suspect.imageSrc} // Assuming imageSrc is a valid import
+              alt={suspect.title}
+              className="h-24 w-24 rounded-full border-2 border-gray-300 object-cover"
+              width={96}
+              height={96}
+            />
+            <p className="mt-2 text-center text-xl">{suspect.name}</p>
+          </button>
+        ))}
+      </div>
+
+      <button
+        className="rounded-xl bg-red-700 px-8 py-3 text-2xl text-white disabled:opacity-50"
+        onClick={() => {
+          handleGuess();
+          playClickSound();
+        }}
+        disabled={selected === null || isGameOver}
+      >
+        Submit Guess
+      </button>
+
+      {result && <div className="mt-6 text-2xl font-bold">{result}</div>}
+    </div>
+  );
 }

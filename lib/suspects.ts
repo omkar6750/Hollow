@@ -7,6 +7,7 @@ import suspect_5 from "@/public/Assets/lyra_quinn.png";
 export const suspects = [
   {
     id: 1,
+    name: "Riley Thorn",
     imageSrc: suspect_1,
     title: "Riley Thorn - The Mechanic",
     description:
@@ -14,6 +15,7 @@ export const suspects = [
   },
   {
     id: 2,
+    name: "Ezra Black",
     imageSrc: suspect_2,
     title: "Ezra Black - The Historian",
     description:
@@ -21,6 +23,7 @@ export const suspects = [
   },
   {
     id: 3,
+    name: "Thomas Vale",
     imageSrc: suspect_3,
     title: "Father Tomas Vale - The Priest",
     description:
@@ -28,6 +31,7 @@ export const suspects = [
   },
   {
     id: 4,
+    name: "Evelyn March",
     imageSrc: suspect_4,
     title: "Evelyn March - The Orphanage Caretaker",
     description:
@@ -35,6 +39,7 @@ export const suspects = [
   },
   {
     id: 5,
+    name: "Lyra quinn",
     imageSrc: suspect_5,
     title: "lyra Quinn - The Librarian",
     description:

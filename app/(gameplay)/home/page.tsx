@@ -5,6 +5,7 @@ import { suspects } from "@/lib/suspects";
 import FlipCard from "@/components/FlipCard";
 import file from "@/public/Assets/file_menu_edited.png";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useClickSound } from "../clickAudioProvider";
 
 // --- Asset Definitions ---
 const audioFiles = [
@@ -107,6 +108,8 @@ function ImageDetailModal({
 
 // --- Main Page Component ---
 export default function Page() {
+  const { playClickSound } = useClickSound();
+
   const [modal, setModal] = useState<
     null | "audio" | "map" | "autopsy" | "polaroid" | "docs"
   >(null);
@@ -139,23 +142,48 @@ export default function Page() {
           objectPosition="center"
         />
         <div className="bates absolute left-0 flex h-full w-1/3 flex-col items-end justify-center space-y-16 px-10 pb-10 text-3xl">
-          <button onClick={() => setModal("audio")}>
+          <button
+            onClick={() => {
+              setModal("audio");
+              playClickSound();
+            }}
+          >
             <span>Audio</span>
           </button>
-          <button onClick={() => setModal("map")}>
+          <button
+            onClick={() => {
+              setModal("map");
+              playClickSound();
+            }}
+          >
             <span>Map</span>
           </button>
-          <button onClick={() => setModal("autopsy")}>
+          <button
+            onClick={() => {
+              setModal("autopsy");
+              playClickSound();
+            }}
+          >
             <span>
               Autopsy
               <br />
               Report
             </span>
           </button>
-          <button onClick={() => setModal("polaroid")}>
+          <button
+            onClick={() => {
+              setModal("polaroid");
+              playClickSound();
+            }}
+          >
             <span>Polaroid</span>
           </button>
-          <button onClick={() => setModal("docs")}>
+          <button
+            onClick={() => {
+              setModal("docs");
+              playClickSound();
+            }}
+          >
             <span>Docs</span>
           </button>
         </div>
