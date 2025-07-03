@@ -12,9 +12,6 @@ export default function AudioModal({
   onClose: () => void;
   audioFiles: { src: string; label: string }[];
 }) {
-  const [playing, setPlaying] = useState<string | null>(null);
-  const currentAudioRef = useRef<HTMLAudioElement | null>(null);
-
   return (
     <Modal open={open} onClose={onClose}>
       <div className="relative flex h-full max-h-[90vh] w-full max-w-[90vw] flex-col items-center justify-center overflow-hidden bg-transparent px-4 py-6 sm:px-8 sm:py-10">
@@ -29,14 +26,10 @@ export default function AudioModal({
         <ul className="z-10">
           {audioFiles.map((audio) => (
             <li key={audio.src} className="mb-2">
-              <span
-                className={`text-black transition-colors ${
-                  playing === audio.src ? "font-bold text-red-700" : ""
-                }`}
-              >
+              <span className={`text-black transition-colors`}>
                 {audio.label}
               </span>
-              <AudioPlayer src={audio.src} label={audio.label} />
+              <AudioPlayer src={audio.src} />
             </li>
           ))}
         </ul>

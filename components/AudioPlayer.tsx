@@ -17,13 +17,7 @@ function resetAllPlayers(except?: React.RefObject<HTMLAudioElement | null>) {
   }
 }
 
-export default function AudioPlayer({
-  src,
-  label,
-}: {
-  src: string;
-  label: string;
-}) {
+export default function AudioPlayer({ src }: { src: string }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);

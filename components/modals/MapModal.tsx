@@ -1,7 +1,6 @@
 import React from "react";
 import Modal from "./Modal";
 import Image from "next/image";
-const mapImage = "";
 
 export default function MapModal({
   open,

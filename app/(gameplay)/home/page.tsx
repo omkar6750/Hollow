@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { suspects } from "@/lib/suspects";
 import FlipCard from "@/components/FlipCard";
 import file from "@/public/Assets/file_menu_edited.png";
