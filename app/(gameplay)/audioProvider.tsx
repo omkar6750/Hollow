@@ -1,6 +1,5 @@
 "use client";
 
-import { Music } from "lucide-react";
 import audio from "@/public/Assets/audio.png";
 import mute from "@/public/Assets/mute.png";
 import React, { useState, useRef } from "react";

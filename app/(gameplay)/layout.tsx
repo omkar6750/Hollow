@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import MusicPlayer from "./audioProvider";
 import ClickSoundProvider from "./clickAudioProvider";
 
-export default function gamePlayLayout({
+export default function GamePlayLayout({
   children,
 }: {
   children: React.ReactNode;
