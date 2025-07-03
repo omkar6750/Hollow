@@ -32,7 +32,7 @@ export default function GamePlayLayout({
               <Link
                 key={item}
                 href={`/${item.toLowerCase()}`}
-                className="bates text-xl xl:text-2xl"
+                className="bates text-xs sm:text-lg xl:text-2xl"
               >
                 {item}
               </Link>
@@ -41,26 +41,9 @@ export default function GamePlayLayout({
           <p className="bates absolute top-6 left-8 z-10 hidden text-xl lg:px-4 xl:block xl:text-3xl">
             The Hollow
           </p>
-          <MusicPlayer />
-          <button
-            className="bates fixed top-4 left-4 z-10 px-4 py-2 text-white shadow xl:hidden"
-            aria-label="Open menu"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            </svg>
-          </button>
+          <div className="hidden sm:block">
+            <MusicPlayer />
+          </div>
         </nav>
         <Image
           className="absolute z-0 h-auto min-h-screen w-auto max-w-none min-w-screen object-cover object-center"

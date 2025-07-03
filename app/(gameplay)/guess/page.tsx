@@ -48,31 +48,31 @@ export default function GuessPage() {
   };
 
   return (
-    <div className="relative flex h-screen w-full flex-col items-center justify-center p-4">
+    <div className="relative bottom-0 flex h-[calc(100vh-6rem)] flex-1 flex-col items-center justify-center">
       {/* Login Modal */}
       {showLoginModal && (
         <LoginModal onClose={() => setShowLoginModal(false)} />
       )}
 
       {/* Main Game Content */}
-      <header className="p-5 text-center text-4xl">
+      <header className="p-2 text-center text-3xl sm:p-5 sm:text-4xl">
         Guess The Real Hollow
       </header>
-      <p className="text-center text-3xl">
+      <p className="text-center text-2xl sm:text-3xl">
         You have {2 - guessesMade} guesses left.
       </p>
 
-      <div className="my-8 flex flex-wrap items-center justify-center">
+      <div className="my-1 flex flex-wrap items-center justify-center sm:my-4">
         {suspects.map((suspect) => (
           <button
             key={suspect.id}
             type="button"
             onClick={() => {
-              setSelected(suspect.id);
+              setSelected(selected === suspect.id ? null : suspect.id);
               playClickSound();
             }}
             disabled={isGameOver}
-            className={`m-2 mx-5 flex flex-col items-center justify-center rounded-lg p-2 transition-all ${selected === suspect.id ? "ring-4 ring-red-500" : ""} ${isGameOver ? "cursor-not-allowed opacity-50" : "hover:scale-105"} `}
+            className={`m-3 mx-2 flex flex-col items-center justify-center rounded-lg p-2 transition-all ${selected === suspect.id ? "ring-4 ring-red-500" : ""} ${isGameOver ? "cursor-not-allowed opacity-50" : "hover:scale-105"} `}
           >
             <Image
               src={suspect.imageSrc} // Assuming imageSrc is a valid import
@@ -87,7 +87,7 @@ export default function GuessPage() {
       </div>
 
       <button
-        className="rounded-xl bg-red-700 px-8 py-3 text-2xl text-white disabled:opacity-50"
+        className="mt-5 w-[70vw] rounded-xl bg-red-700 px-8 py-3 text-2xl text-white disabled:opacity-50"
         onClick={() => {
           handleGuess();
           playClickSound();

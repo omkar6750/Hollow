@@ -24,15 +24,15 @@ const MusicPlayer = () => {
 
       <button
         onClick={togglePlayPause}
-        className="absolute top-4 right-4 z-20 rounded-full bg-gray-800 p-2 text-white transition hover:bg-gray-700"
+        className="z-20 rounded-full bg-gray-800 text-white transition hover:bg-gray-700 sm:absolute sm:top-4 sm:right-4"
         aria-label={isPlaying ? "Pause music" : "Play music"}
       >
         {isPlaying ? (
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/35">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10">
             <Image src={audio} alt="" className="h-8 w-8 rounded-full" />
           </div>
         ) : (
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/35">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10">
             <Image src={mute} alt="" className="h-8 w-8 rounded-full" />
           </div>
         )}
