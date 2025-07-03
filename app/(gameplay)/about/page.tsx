@@ -21,12 +21,12 @@ export default function About() {
         <ul className="pb-2 text-center">
           <li>Story, Game Design & Worldbuilding</li>
         </ul>
-        <p className="pb-2 text-center text-4xl sm:text-5xl">Deepankar Paria</p>
+        <p className="pb-2 text-center text-3xl sm:text-3xl">Deepankar Paria</p>
         <p className="pb-14 text-center">
           (Writer, Creative Director, Visual Lore Design)
         </p>
         <p className="pb-2 text-center">Programming & Backend Development</p>
-        <p className="pb-2 text-center text-4xl sm:text-5xl">Omkar Pawar</p>
+        <p className="pb-2 text-center text-3xl sm:text-4xl">Omkar Pawar</p>
         <p className="pb-10 text-center">
           (Game Logic, Web Functionality, Audio Integration)
         </p>

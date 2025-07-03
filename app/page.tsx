@@ -1,5 +1,5 @@
 import Image from "next/image";
-import bg from "@/public/Assets/game_bg.png";
+import bg from "@/public/Assets/landing_page.png";
 import Link from "next/link";
 
 export default function Home() {
@@ -10,13 +10,18 @@ export default function Home() {
         src={bg}
         alt="Background of the mystery game"
       />
-      <nav>
-        <Link href="/home">
-          <button className="bates relative z-20 rounded-3xl border-4 p-12 text-5xl text-black">
-            Play
-          </button>
-        </Link>
-      </nav>
+      <h1 className="bates z-20 mb-6 text-5xl sm:mb-10 sm:text-8xl">
+        The Hollow
+      </h1>
+      <h2 className="z-20 mb-10 text-2xl sm:mb-16 sm:text-3xl">
+        {" "}
+        Chapter One: Nethermoor
+      </h2>
+      <Link href="/home">
+        <button className="bates relative z-20 m-5 rounded-3xl text-3xl text-white sm:text-4xl">
+          Play
+        </button>
+      </Link>
     </div>
   );
 }

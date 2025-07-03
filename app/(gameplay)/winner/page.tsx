@@ -11,9 +11,13 @@ export default async function WinnerPage() {
     redirect("/guess");
   }
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center bg-black">
-      <h1 className="bates text-6xl">Case Solved</h1>
-      <h2 className="text-8xl">You Caught The Hollow</h2>
+    <div className="flex h-screen w-full flex-col items-center justify-center bg-black text-center">
+      <h1 className="bates mb-10 text-center text-4xl sm:mb-16 sm:text-6xl">
+        Case Solved
+      </h1>
+      <h2 className="text-center text-5xl sm:text-8xl">
+        You Caught The Hollow
+      </h2>
     </div>
   );
 }
