@@ -33,7 +33,7 @@ export default function DocsModal({
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
           {documents.map((src) => (
             <div key={src} className="flex flex-col items-center">
-              <span className="mb-1 w-full truncate text-center text-sm font-semibold text-black">
+              <span className="mb-1 w-full text-center text-sm font-semibold text-wrap text-black">
                 {getDocName(src)}
               </span>
               <Image

@@ -50,7 +50,7 @@ const documents = [
   "/Assets/DOCUMENTS/burnt_piece_of_paper.png",
   "/Assets/DOCUMENTS/ezra_black_note.png",
   "/Assets/DOCUMENTS/hollow_bell_codex.jpg",
-  "/Assets/DOCUMENTS/miralang_drawing.jpg",
+  "/Assets/DOCUMENTS/mira_lang_drawing.jpg",
   "/Assets/DOCUMENTS/piece_of_paper_found_in_riley_garage.png",
   "/Assets/DOCUMENTS/Town_Census_2000.jpg",
 ];
