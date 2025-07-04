@@ -12,12 +12,28 @@ export async function checkGuess(suspectId: number) {
     return { error: "AUTH_REQUIRED" };
   }
 
-  const user = await prisma.user.findUnique({
+  let user = await prisma.user.findUnique({
     where: { id: session.user.id },
   });
 
   if (!user) {
     return { error: "User not found." };
+  }
+
+  const now = new Date();
+  if (user.lastGuessAt) {
+    const lastGuessDate = new Date(user.lastGuessAt);
+    const timeDiff = now.getTime() - lastGuessDate.getTime();
+    const hoursDiff = timeDiff / (1000 * 3600);
+
+    // If it has been more than 24 hours since the last guess
+    if (hoursDiff >= 24) {
+      // Reset the guess count and update the user object for the next checks
+      user = await prisma.user.update({
+        where: { id: session.user.id },
+        data: { guessCount: 0 },
+      });
+    }
   }
 
   if (user.guessCount >= 2) {
@@ -27,7 +43,7 @@ export async function checkGuess(suspectId: number) {
   // Increment guess count in the database
   const updatedUser = await prisma.user.update({
     where: { id: session.user.id },
-    data: { guessCount: { increment: 1 } },
+    data: { guessCount: { increment: 1 }, lastGuessAt: now },
   });
 
   const correctId = 1; // The actual ID of the correct suspect

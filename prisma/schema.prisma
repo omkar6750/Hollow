@@ -19,6 +19,7 @@ model User {
 
   // Custom field for our game
   guessCount    Int       @default(0)
+  lastGuessAt   DateTime? 
 }
 
 model Account {

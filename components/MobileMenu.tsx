@@ -13,7 +13,7 @@ export default function MobileMenu({
   const { playClickSound } = useClickSound();
 
   return (
-    <div className="fixed bottom-0 left-0 z-50 flex w-full justify-around bg-gradient-to-b from-transparent to-black py-3 sm:hidden">
+    <div className="fixed bottom-0 left-0 z-50 flex w-full justify-around bg-gradient-to-b from-transparent to-black py-3 sm:flex xl:hidden">
       <button
         onClick={() => {
           setModal("audio");
