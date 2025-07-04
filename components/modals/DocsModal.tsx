@@ -13,6 +13,11 @@ export default function DocsModal({
   documents: string[];
   setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>;
 }) {
+  const getDocName = (src: string) => {
+    const fileName = src.split("/").pop()?.split(".")[0] || "";
+    const nameWithSpaces = fileName.replace(/_/g, " ");
+    return nameWithSpaces.charAt(0).toUpperCase() + nameWithSpaces.slice(1);
+  };
   return (
     <Modal open={open} onClose={onClose} className="w-full max-w-2xl">
       <div
@@ -27,15 +32,20 @@ export default function DocsModal({
         </h2>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
           {documents.map((src) => (
-            <Image
-              key={src}
-              src={src}
-              alt="Document"
-              height={300}
-              width={300}
-              className="h-auto w-full cursor-pointer rounded-md object-cover transition-transform hover:scale-105"
-              onClick={() => setSelectedImage(src)}
-            />
+            <div key={src} className="flex flex-col items-center">
+              <span className="mb-1 w-full truncate text-center text-sm font-semibold text-black">
+                {getDocName(src)}
+              </span>
+              <Image
+                key={src}
+                src={src}
+                alt="Document"
+                height={300}
+                width={300}
+                className="h-auto w-full cursor-pointer rounded-md object-cover transition-transform hover:scale-105"
+                onClick={() => setSelectedImage(src)}
+              />
+            </div>
           ))}
         </div>
       </div>

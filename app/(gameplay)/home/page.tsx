@@ -47,11 +47,11 @@ const autopsyReports = [
   "/Assets/AUTOPSY_REPORT/noah.jpg",
 ];
 const documents = [
-  "/Assets/DOCUMENTS/burntpieceofpaper.png",
-  "/Assets/DOCUMENTS/ezrablack_note.png",
+  "/Assets/DOCUMENTS/burnt_piece_of_paper.png",
+  "/Assets/DOCUMENTS/ezra_black_note.png",
   "/Assets/DOCUMENTS/hollow_bell_codex.jpg",
   "/Assets/DOCUMENTS/miralang_drawing.jpg",
-  "/Assets/DOCUMENTS/pieceofpaperfoundinrileygarage.png",
+  "/Assets/DOCUMENTS/piece_of_paper_found_in_riley_garage.png",
   "/Assets/DOCUMENTS/Town_Census_2000.jpg",
 ];
 
@@ -125,7 +125,7 @@ export default function Page() {
       </section>
 
       {/* --- Suspects Flip Cards --- */}
-      <section className="relative grid h-full w-full items-center justify-center gap-10 overflow-auto p-20 xl:w-3/4 xl:grid-cols-3 xl:overflow-hidden xl:p-0 xl:pr-20">
+      <section className="relative grid h-full w-full items-center justify-center gap-5 overflow-auto p-20 xl:w-3/4 xl:grid-cols-3 xl:overflow-auto xl:p-0 xl:pr-20">
         {suspects.map((suspect) => (
           <FlipCard
             key={suspect.id}
